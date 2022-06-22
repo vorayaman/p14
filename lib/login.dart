@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p14/Auth/fireclass.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -8,8 +9,12 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController email =TextEditingController();
+  TextEditingController password =TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Auth a1 = Auth();
+    a1.currentUser(context);
     return SafeArea(
       child: Scaffold(
         body: Padding(
@@ -18,6 +23,7 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                controller: email,
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.email,
@@ -27,6 +33,7 @@ class _LoginState extends State<Login> {
                 ),
               ),
               TextField(
+                controller: password,
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.lock,
@@ -45,13 +52,32 @@ class _LoginState extends State<Login> {
                   color: Colors.pink.shade400,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.pink.shade400),
+                  onPressed: () {
+                   Auth().login(email.text, password.text, context);
+
+                  },
                   child: Text(
                     "LogIn",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ),
+              // Container(
+              //   height: 60,
+              //   width: double.infinity,
+              //   decoration: BoxDecoration(
+              //     color: Colors.pink.shade400,
+              //     borderRadius: BorderRadius.circular(20),
+              //   ),
+              //   child: Center(
+              //     child: Text(
+              //       "LogIn",
+              //       style: TextStyle(color: Colors.white, fontSize: 20),
+              //     ),
+              //   ),
+              // ),
               SizedBox(
                 height: 20,
               ),

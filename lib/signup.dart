@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p14/Auth/fireclass.dart';
 
 class Signup extends StatefulWidget {
   const Signup({Key? key}) : super(key: key);
@@ -8,6 +9,8 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  TextEditingController email=TextEditingController();
+  TextEditingController password=TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,7 +48,12 @@ class _SignupState extends State<Signup> {
                   color: Colors.pink.shade400,
                   borderRadius: BorderRadius.circular(20),
                 ),
-                child: Center(
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(primary: Colors.pink.shade400),
+                  onPressed: () {
+                    Auth().signup(email.text, password.text);
+
+                  },
                   child: Text(
                     "Sign Up",
                     style: TextStyle(color: Colors.white, fontSize: 20),

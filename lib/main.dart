@@ -1,10 +1,17 @@
 import 'dart:async';
 
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:p14/Auth/fireclass.dart';
+import 'package:p14/homesceern.dart';
 import 'package:p14/login.dart';
 import 'package:p14/signup.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+ await Firebase.initializeApp();
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -12,6 +19,7 @@ void main() {
         '/': (context) => Slpesh(),
         '/login': (context) => Login(),
         '/signup': (context) => Signup(),
+        '/home':(context)=>Homepage(),
       },
     ),
   );
@@ -25,6 +33,7 @@ class Slpesh extends StatefulWidget {
 }
 
 class _SlpeshState extends State<Slpesh> {
+
   @override
   void initState() {
     super.initState();
@@ -32,15 +41,7 @@ class _SlpeshState extends State<Slpesh> {
 
   @override
   Widget build(BuildContext context) {
-    Timer(
-      Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Login(),
-        ),
-      ),
-    );
+    check(context);
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.pink.shade400,
@@ -63,5 +64,34 @@ class _SlpeshState extends State<Slpesh> {
         ),
       ),
     );
+  }
+
+  void check(BuildContext context) {
+    if(Auth().currentUser(context)==true)
+    {
+      Timer(Duration(seconds: 3), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (c) {
+              return Homepage();
+            },
+          ),
+        );
+      });
+    }
+    else
+    {
+      Timer(Duration(seconds: 3), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (c) {
+              return Login();
+            },
+          ),
+        );
+      });
+    }
   }
 }
