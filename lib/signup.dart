@@ -21,6 +21,7 @@ class _SignupState extends State<Signup> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
+                controller: email,
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.email,
@@ -30,6 +31,7 @@ class _SignupState extends State<Signup> {
                 ),
               ),
               TextField(
+                controller: password,
                 decoration: InputDecoration(
                   prefixIcon: Icon(
                     Icons.lock,

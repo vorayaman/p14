@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:p14/login.dart';
 
 class Auth {
+
   FirebaseAuth _auth = FirebaseAuth.instance;
+
 
   void signup(
     String e1,
